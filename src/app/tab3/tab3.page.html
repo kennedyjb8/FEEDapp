@@ -1,0 +1,124 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf='submitAttempt==False' text-center>
+      Join FEED
+    </ion-title>
+    <ion-title *ngIf='submitAttempt' text-center>
+      Account Page
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div *ngIf='submitAttempt==False'>
+    <ion-list>
+      <form [formGroup]='signupForm'>
+        <ion-item>
+          <ion-label position="floating">First Name</ion-label>
+          <ion-input formControlName='firstName' type="text" clearonSubmit=True></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Last Name</ion-label>
+          <ion-input formControlName='lastName' type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName='email' type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">ZIP Code</ion-label>
+          <ion-input formControlName='zipCode' type="number"></ion-input>
+        </ion-item>
+      </form>
+    </ion-list>
+
+    <ion-button expand="block" color="primary" fill="outline" (click)="save()">Join!</ion-button>
+    </div>
+  </ion-card>
+
+  <!-- IF user has signed in but not completed registration -->
+  <div *ngIf='(submitAttempt) && !(finishedBool)'>
+    <span *ngIf='Phase1'>
+        <img src='./assets/Signup1.gif' width="100%">
+        <ion-button expand="block" fill='outline' (click)="signupPhase2()">Configure my Account</ion-button>
+    </span>
+    <span *ngIf='Phase2'>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Invite Contacts</ion-card-title>
+          </ion-card-header>
+          <img src="./assets/Signup2.gif">
+            <ion-label position="floating">Invitee's email address</ion-label>
+            <ion-input type="email" placeholder="Email"></ion-input>
+        </ion-card>
+        <ion-button expand="block" fill='outline' (click)="signupPhase3()">Done!</ion-button>
+    </span>
+    <span *ngIf='Phase3'>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            Which of these best describe you?
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid><ion-row><ion-col text-center>
+            <ion-button (click)="addDescriptor('Producer')">Producer</ion-button>
+            <ion-button (click)="addDescriptor('Consumer')">Consumer</ion-button>
+            <ion-button (click)="addDescriptor('Entrepreneur')">Entrepreneur</ion-button>
+            <ion-button (click)="addDescriptor('Investor')">Investor</ion-button>
+            <ion-button (click)="addDescriptor('Worker')">Worker</ion-button>
+          </ion-col></ion-row></ion-grid>
+          <ion-list no-lines><ion-item> I am a <span *ngFor="let descriptor of descriptors"><ion-chip (click)="removeDescriptor(descriptor)" color="tertiary"><ion-label>{{descriptor}}</ion-label></ion-chip></span></ion-item></ion-list>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Tell the FEED Network your story</ion-card-title>
+          <ion-card-subtitle>This is also a good place to put your contact information</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label position="floating">About Me</ion-label>
+          <ion-input type="text" placeholder="Remember, this is what people will see with your profile"></ion-input>
+        </ion-card-content>
+      </ion-card>
+      <ion-button expand="block" fill="outline" (click)="finishedSignup()">Finish Signup</ion-button>
+    </span>
+
+  </div>
+  <!-- IF user has recently signed in AND Animation has played-->
+
+  <div *ngIf='(submitAttempt) && (finishedBool)'>
+    <ion-card>
+      <ion-card-header>
+        <ion-icon name="person"></ion-icon>
+        Welcome, {{forDisplay.firstName}}
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-toggle [(ngModel)]="showInfo" checked='false'></ion-toggle>Show my account information
+          </ion-item>
+          <div *ngIf='this.showInfo'>
+            <ion-item>
+              First Name:&nbsp;<ion-text color='primary'>{{forDisplay.firstName}}</ion-text>
+            </ion-item>
+            <ion-item>
+              Last Name:&nbsp; <ion-text color='primary'>{{forDisplay.lastName}}</ion-text>
+            </ion-item>
+            <ion-item>
+              Email:&nbsp; <ion-text color='primary'>{{forDisplay.email}}</ion-text>
+            </ion-item>
+            <ion-item>
+              ZIP code:&nbsp; <ion-text color='primary'>{{forDisplay.zipCode}}</ion-text>
+            </ion-item>
+          </div>
+      </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

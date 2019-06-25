@@ -1,0 +1,47 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".secondGIF").delay(2000).fadeIn(500);
+});
+</script>
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>
+      Home Page
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="welcome-card">
+      <ion-img src="/assets/farmrows.jpg"></ion-img>
+      <ion-img class='card-animation' src="/assets/HomePage1.gif"></ion-img>
+      <ion-card-header>
+        <ion-card-subtitle style="color:success">Get Started</ion-card-subtitle>
+        <ion-card-title>Welcome to the FEED Network
+        </ion-card-title>
+
+
+      <!--<ion-button color='primary' fill='outline' href="/marketplace">Check out our all-new Network Page!</ion-button>-->
+      </ion-card-header>
+      <ion-card-content>
+        <a href="./tabs/network"><ion-img class='card-animation' src="/assets/HomePage2.gif"></ion-img></a>
+        <p>Sign up to be a Producer, Food Entrepreneur, or Consumer below</p>
+        <ion-button color="primary" fill="outline" href="/tabs/tab3">Create an account</ion-button>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="promo-card">
+      <ion-img src="/assets/network.jpg"></ion-img>
+      <ion-card-header>
+        <ion-card-title>How can I use FEED?</ion-card-title>
+        <ion-button color='primary' fill='outline' href="/tabs/tab2">See How</ion-button>
+      </ion-card-header>
+
+
+    </ion-card>
+    <ion-list>
+      <ion-item href="http://www.feednetwork631765643.wordpress.com">
+        <ion-icon slot="start" color="medium" name="book"></ion-icon>
+        <ion-label>Our Website</ion-label>
+      </ion-item>
+    </ion-list>
+</ion-content>

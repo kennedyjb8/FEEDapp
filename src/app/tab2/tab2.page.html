@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>
+      About FEED
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="topcard">
+    <ion-card-header>
+      <ion-text color='light'><h1>I am looking for:</h1></ion-text>
+    </ion-card-header>
+    <ion-card-content>
+
+    <ion-grid>
+      <ion-row align-items-center>
+      <ion-col *ngFor='let userType of userTypes' align-self-center text-center>
+          <ion-button (click) = "showBlurb(userType)" color='light' fill='outline'>{{userType}}s
+          </ion-button>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item *ngFor='let selectedUserType of selectedUserTypes'>
+      <ion-list>
+        <ion-header no-border><ion-icon name='body'></ion-icon>Featured {{selectedUserType}}: {{featuredUsers[selectedUserType]}}</ion-header>
+        <ion-item lines='none'>
+          <ion-img class='bigboy' item-end src="../assets/{{featuredUsers[selectedUserType]}}.jpg"></ion-img>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+
+  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>What are we?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Feed, at its core, is social media for the food industry. We make connections to new markets, to hard-to-find suppliers that can improve our food landscape as a whole.
+      <br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </ion-card-content>
+    <ion-button expand="block" color="secondary">Get Started!</ion-button>
+  </ion-card>
+
+</ion-content>

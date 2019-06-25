@@ -1,0 +1,32 @@
+.temperedSize {
+  max-width: 35vw;
+};
+.removeTagIcon {
+  vertical-align: middle;
+};
+.UserCardImages {
+  display: block;
+  vertical-align: middle;
+};
+.UserCardImages img{
+  display: block;
+  float: left;
+  vertical-align: middle;
+};
+.clear {
+  clear: both;
+  height: 0;
+  width: 0;
+  font-size: 1px;
+  line-height: 0;
+}
+.iconsize {
+  position: relative;
+  width: 3%;
+  float:left;
+  bottom: 1px
+
+}
+.custom {
+  width: 60px;
+}

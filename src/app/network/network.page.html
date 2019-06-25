@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Access the FEED Network</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid><ion-row><ion-col text-center>
+    <ion-button (click)="catSelect('producer')">Show Producers</ion-button>
+    <ion-button (click)="catSelect('consumer')">Show Consumers</ion-button>
+    <ion-button (click)="catSelect('entrepreneur')">Show Entrepreneurs</ion-button>
+    <ion-button (click)="catSelect('investor')">Show Investors</ion-button>
+    <ion-button (click)="catSelect('worker')">Show Workers</ion-button>
+  </ion-col></ion-row></ion-grid>
+  <ion-text color="primary"> Categories Showing: </ion-text>
+  <div *ngIf="selectedCategories != []">
+    <span *ngFor="let selectedCategory of selectedCategories">
+      <ion-chip (click)='catDeselect(selectedCategory)' color="tertiary">
+        <ion-label>{{selectedCategory}} <ion-icon name="close" class="removeTagIcon"></ion-icon></ion-label>
+      </ion-chip>
+    </span>
+  </div>
+  <!-- OLD VERSION, new version can clear input <ion-input #inputTag (keyup.enter)="onEnter(inputTag.value)" placeholder="Add a Tag" clear-input></ion-input> -->
+  <ion-card>
+    <ion-card-header><ion-card-title>Add a Tag</ion-card-title></ion-card-header>
+    <ion-input [(ngModel)]="inputTag" id="newtag" placeholder=" Add a Tag" (keyup.enter)="addTag()"></ion-input>
+  </ion-card>
+  <ion-card>
+    <ion-card-header><ion-card-title>Add an Issue Tag</ion-card-title></ion-card-header>
+    <ion-input [(ngModel)]="inputissueTag" id="newtag" placeholder=" Add an Issue Tag" (keyup.enter)="addIssueTag()"></ion-input>
+  </ion-card>
+
+  <ion-text color="primary">Tags Active: </ion-text>
+  <span *ngFor="let selectedTag of selectedTags">
+    <ion-chip (click)='removeTag(selectedTag)' color="danger">
+      <ion-label>{{selectedTag}} <ion-icon name="close" class="removeTagIcon"></ion-icon></ion-label>
+    </ion-chip>
+  </span>
+  <br>
+  <br>
+  <ion-text color="primary">Issue Tags Active: </ion-text>
+  <span *ngFor="let issueTag of selectedissueTags">
+    <ion-chip (click)='removeissueTag(issueTag)' color="danger">
+      <ion-label>{{issueTag}} <ion-icon name="close" class="removeTagIcon"></ion-icon></ion-label>
+    </ion-chip>
+  </span>
+  <ion-card *ngFor='let hardcodedUser of hardcodedUsers'>
+    <div *ngIf="selectedCategories.includes(hardcodedUser.category[0]) || selectedCategories.includes(hardcodedUser.category[1])">
+    <ion-card-header>
+      <ion-title color='primary'> {{hardcodedUser.title}}</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img src="./assets/genericuserinfo.jpg">
+      <ion-text *ngIf='hardcodedUser.category[1]'>Categories: </ion-text><ion-text *ngIf='!(hardcodedUser.category[1])'>Category: </ion-text>
+      <ion-chip color="primary" outline>{{hardcodedUser.category[0]}}</ion-chip> <ion-chip color="primary" *ngIf='hardcodedUser.category[1]' outline>{{hardcodedUser.category[1]}}</ion-chip>
+      <br>
+      <ion-text>Tags: </ion-text>
+      <ion-chip color="tertiary" outline *ngFor="let profileTag of hardcodedUser.tags">{{profileTag}}</ion-chip>
+      <br>
+      <ion-text>Issue Tags: </ion-text>
+      <ion-chip color="secondary" outline *ngFor="let issueTag of hardcodedUser.issueTags">{{issueTag}}</ion-chip>
+      <!-- For testing rankings <ion-text>{{hardcodedUser.rankindex}}</ion-text> -->
+      <br>
+      <ion-text>Microloan links</ion-text><ion-button fill="outline" href="{{hardcodedUser.microloan}}"><ion-img style="width:20%" src="./assets/kiva.png"></ion-img></ion-button>
+      <br>
+      <ion-text>Buy our goods</ion-text><ion-button fill="outline" href="{{hardcodedUser.marketplace}}"><ion-text color="primary">Durham Farmers Market</ion-text></ion-button>
+    </ion-card-content>
+    </div>
+  </ion-card>
+</ion-content>
